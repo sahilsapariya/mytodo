@@ -61,8 +61,9 @@ const Todo = () => {
                             onChange={(e) => setInputData(e.target.value)}
                             ref={textInput}
                             autoFocus
-                            autoComplete='off'
+                            autoComplete='false'
                             autoCorrect='false'
+                            spellCheck='false'
                         />
                         <button className='add-button' title='Add Item' onClick={() => addItem()}>Add</button>
                     </div>
