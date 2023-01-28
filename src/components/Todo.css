@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #E3FDFD;
+    font-family: 'Kanit';
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #E3FDFD;
+    /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #002c2e;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #002c2e;
+    /* creates padding around scroll thumb */
+}
+
+
+.main-div {
+    min-height: 100vh;
+    overflow: auto;
+
+}
+
+.child-div img {
+    margin: 2rem 0 1rem 0;
+    border-radius: 50%;
+    box-shadow: 1px 2px 1px 1px #71C9CE;
+    background-color: white;
+}
+
+figcaption {
+    font-size: 1.5rem;
+}
+
+
+.addItems {
+    margin: 0 10%;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    padding: 0.5rem 0.7rem;
+    background-color: #CBF1F5;
+    font-size: 1.1rem;
+    width: 100%;
+    border-radius: 10px;
+    border-color: #71C9CE;
+}
+
+input:focus, input:active {
+    border-color: #006f75;
+    outline: none;
+}
+
+.add-button {
+    margin: 0 0.5rem;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    background-color: #006f75;
+    color: white;
+    width: 20%;
+    border-color: aqua;
+}
+
+.add-button:hover {
+    background-color: #002c2e;
+}
+
+
+.showItems {
+    margin: 0 10%;
+    justify-content: center;
+
+}
+
+.eachItem {
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    background-color: #A6E3E9;
+}
+
+.eachItem span {
+    width: 85%;
+    font-size: large;
+    text-align: left;
+    background-color: #A6E3E9;
+}
+
+.eachItem i {
+    padding-top: 5px;
+    background-color: #A6E3E9;
+    width: 5%;
+    cursor: pointer;
+}
+
+.eachItem:hover .delete-icon:hover {
+    color: red;
+}
+.eachItem:hover .edit-icon:hover {
+    color: white;
+}
+.eachItem:hover .complete-icon:hover {
+    color: white;
+}
+
+.eachItem:hover {
+    background-color: #125f92;
+}
+
+.eachItem:hover i {
+    color: white;
+    background-color: #125f92;
+}
+
+.eachItem:hover span {
+    background-color: #125f92;
+    color: #CBF1F5;
+}
+.eachItem-completed {
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    opacity: 0.5;
+    background-color: #A6E3E9;
+}
+
+.eachItem-completed span {
+    width: 85%;
+    font-size: large;
+    text-decoration: line-through 2px;
+    text-align: left;
+    background-color: #A6E3E9;
+}
+
+.eachItem-completed i {
+    padding-top: 5px;
+    background-color: #A6E3E9;
+    width: 5%;
+    cursor: pointer;
+}
+
+.eachItem-completed:hover .delete-icon:hover {
+    color: red;
+}
+.eachItem-completed:hover .edit-icon:hover {
+    color: white;
+}
+.eachItem-completed:hover .complete-icon:hover {
+    color: white;
+}
+
+.eachItem-completed:hover {
+    background-color: #125f92;
+}
+
+.eachItem-completed:hover i {
+    color: white;
+    background-color: #125f92;
+}
+
+.eachItem-completed:hover span {
+    background-color: #125f92;
+    color: #CBF1F5;
+}
+
+.remove-btn {
+    margin-top: 2rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
+    background-color: #006f75;
+    color: white;
+    width: 7rem;
+    border-color: aqua;
+}
+
+.remove-btn:hover {
+    background-color: #002c2e;
+}
+
+
+footer {
+    background-color: black;
+    color: white;
+    left: 0;
+    bottom: 0;
+    font-size: 1.2rem;
+    font-family: cursive;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+}
+
+.task-status{
+    float: left;
+    color: grey;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+}
+
+a {
+    text-decoration: none;
+    text-transform: none;
+    color: white;
+    background-color: black;
+}
+
+@media only screen and (min-width: 700px) {
+    .child-div {
+        margin: 0 10%;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .child-div {
+        margin: 0 25%;
+    }
+}
