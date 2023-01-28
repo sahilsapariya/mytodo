@@ -3,25 +3,38 @@ import todo from '../images/todo-icon.png'
 import './Todo.css';
 import Popup from './Popup';
 
-const getLocalStorage = () => {
-    let list = localStorage.getItem('lists');
+const getLocalStorage1 = () => {
+    let list1 = localStorage.getItem('tasksInProgress');
 
-    if (list) {
-        return JSON.parse(list)
+    if (list1) {
+        return JSON.parse(list1)
     }
     else {
+        return []
+    }
+}
+const getLocalStorage2 = () => {
+    let list2 = localStorage.getItem('tasksCompleted');
+    if(list2){
+        return JSON.parse(list2)
+    }
+    else{
         return []
     }
 }
 
 const Todo = () => {
     const [inputData, setInputData] = useState('')
+    // const [newData, setNewData] = useState('')
 
-    const [items, setItems] = useState(getLocalStorage())
-    const [completedItems, setCompletedItems] = useState([])
+    const [items, setItems] = useState(getLocalStorage1())
+    const [completedItems, setCompletedItems] = useState(getLocalStorage2())
 
-    const [popupTrigger, setPopupTrigger] = useState(false)
-    const [emptyListTrigger, setEmptyListTrigger] = useState(false)
+    const [removePopupTrigger, setRemovePopupTrigger] = useState(false)
+    const [completePopupTrigger, setCompletePopupTrigger] = useState(false)
+    const [removeEmptyListTrigger, setRemoveEmptyListTrigger] = useState(false)
+    const [completeEmptyListTrigger, setCompleteEmptyListTrigger] = useState(false)
+    // const [editTaskTrigger, setEditTaskTrigger] = useState(false)
 
     const textInput = useRef(null)
 
@@ -51,9 +64,11 @@ const Todo = () => {
         })
         setCompletedItems(updatedItems)
     }
-    const editTask = (id) => {
-
-    }
+    // const activateEdit = (id) => {
+    //     setEditTaskTrigger(true)
+    //     editTask(id)
+    // }
+    
     const completeItem = (id) => {
         const updatedItems = items.filter((element, index) => {
             return index === id
@@ -63,23 +78,23 @@ const Todo = () => {
     }
 
     useEffect(() => {
-        localStorage.setItem('lists', JSON.stringify(items))
+        localStorage.setItem('tasksInProgress', JSON.stringify(items))
     }, [items]);
-
+    
     useEffect(() => {
-        textInput.current.focus()
-    }, [])
-
+        localStorage.setItem('tasksCompleted', JSON.stringify(completedItems))
+    }, [completedItems])
     const deleteAllItems = () => {
         setItems([])
         setCompletedItems([])
-        setPopupTrigger(false)
+        setRemovePopupTrigger(false)
     }
     const completeAllItems = () => {
         setCompletedItems(items)
         setItems([])
-        setPopupTrigger(false)
+        setCompletePopupTrigger(false)
     }
+
 
     return (
         <>
@@ -110,7 +125,7 @@ const Todo = () => {
                                     return (
                                         <div className='eachItem' key={index}>
                                             <span>{element}</span>
-                                            <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => editTask(index)}></i>
+                                            {/* <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => activateEdit(index)}></i> */}
                                             <i className='far fa-square complete-icon' title='Mark as Complete' onClick={() => completeItem(index)}></i>
                                             <i className='far fa-trash-alt delete-icon' title='Delete Item' onClick={() => deleteItem(index)}></i>
                                         </div>
@@ -126,7 +141,7 @@ const Todo = () => {
                                     return (
                                         <div className='eachItem-completed' key={index}>
                                             <span>{element}</span>
-                                            <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => editTask(index)}></i>
+                                            {/* <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => activateEdit(index)}></i> */}
                                             <i className='fa fa-check-circle complete-icon' title='Mark as incomplete' onClick={() => undoComplete(index)}></i>
                                             <i className='far fa-trash-alt delete-icon' title='Delete Item' onClick={() => deleteCompletedItem(index)}></i>
                                         </div>
@@ -137,44 +152,58 @@ const Todo = () => {
                     </div>
 
                     <div className='showItems'>
-                        <Popup trigger={popupTrigger}>
+                        <Popup trigger={removePopupTrigger}>
                             <h3>Are you sure?</h3>
                             <p>Would you like to remove all the items from the list? This action cannot be undone</p> <br />
                             <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={deleteAllItems}>Yes</button>
-                            <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={() => setPopupTrigger(false)}>No</button>
+                            <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={() => setRemovePopupTrigger(false)}>No</button>
                         </Popup>
-                        <Popup trigger={emptyListTrigger}>
+                        <Popup trigger={removeEmptyListTrigger}>
                             <h3>Empty list</h3>
-                            <p>There is no any items added to the list</p>
-                            <button className='remove-btn' onClick={() => setEmptyListTrigger(false)}>Close</button>
+                            <p>There is nothing in the list</p>
+                            <button className='remove-btn' onClick={() => setRemoveEmptyListTrigger(false)}>Close</button>
                         </Popup>
 
-
-
-                        <Popup trigger={popupTrigger}>
+                        <Popup trigger={completePopupTrigger}>
                             <h3>Are you sure?</h3>
                             <p>Would you like to complete all the items from the list?</p> <br />
                             <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={completeAllItems}>Yes</button>
-                            <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={() => setPopupTrigger(false)}>No</button>
+                            <button className='remove-btn' style={{ width: '4rem', margin: '0 0.5rem' }} onClick={() => setCompletePopupTrigger(false)}>No</button>
                         </Popup>
-                        <Popup trigger={emptyListTrigger}>
+                        <Popup trigger={completeEmptyListTrigger}>
                             <h3>Empty list</h3>
-                            <p>There is no any items added to the list</p>
-                            <button className='remove-btn' onClick={() => setEmptyListTrigger(false)}>Close</button>
+                            <p>There is no task in progress</p>
+                            <button className='remove-btn' onClick={() => setCompleteEmptyListTrigger(false)}>Close</button>
                         </Popup>
 
+                        {/* <Popup trigger={editTaskTrigger}>
+                            <h3>Edit Task</h3>
+                            <input type='text' id='input-field' placeholder='✍ Add Items...'
+                            value={newData}
+                            onChange={(e) => setInputData(e.target.value)}
+                            ref={textInput}
+                            autoFocus
+                            autoComplete='off'
+                            autoCorrect='false'
+                            spellCheck='false' />
+
+                            <button className='remove-btn' onClick={editTask}>Save</button>
+                            <button className='remove-btn' onClick={() => setEditTaskTrigger(false)}>Close</button>
+                        </Popup> */}
 
 
                         <button className='remove-btn' onClick={() => {
                             items.length !== 0 || completedItems.length !== 0
-                                ? setPopupTrigger(true)
-                                : setEmptyListTrigger(true)
+                                ? setRemovePopupTrigger(true)
+                                : setRemoveEmptyListTrigger(true)
                         }} title='Remove all the tasks'>Remove All</button>
-                        <button className='remove-btn' style={{ width: '8rem', margin: '0 0.5rem' }} title='Mark as complete all the tasks' onClick={() => {
+
+                        <button className='remove-btn' style={{ width: '8rem', margin: '0 0.5rem' }} onClick={() => {
                             items.length !== 0
-                                ? setPopupTrigger(true)
-                                : setEmptyListTrigger(true)
-                        }}>Complete All</button>
+                                ? setCompletePopupTrigger(true)
+                                : setCompleteEmptyListTrigger(true)
+                        }} title='Mark as complete all the tasks'>Complete All</button>
+
                     </div>
                 </div>
 
