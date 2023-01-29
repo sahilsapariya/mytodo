@@ -74,6 +74,7 @@ input:focus, input:active {
     border-radius: 10px;
     background-color: #006f75;
     color: white;
+    cursor: pointer;
     width: 20%;
     border-color: aqua;
 }
@@ -99,7 +100,7 @@ input:focus, input:active {
 }
 
 .eachItem span {
-    width: 85%;
+    width: 90%;
     font-size: large;
     text-align: left;
     background-color: #A6E3E9;
@@ -146,7 +147,7 @@ input:focus, input:active {
 }
 
 .eachItem-completed span {
-    width: 85%;
+    width: 90%;
     font-size: large;
     text-decoration: line-through 2px;
     text-align: left;
@@ -192,6 +193,7 @@ input:focus, input:active {
     background-color: #006f75;
     color: white;
     width: 7rem;
+    cursor: pointer;
     border-color: aqua;
 }
 

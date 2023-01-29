@@ -113,7 +113,7 @@ const Todo = () => {
                             autoFocus
                             autoComplete='off'
                             autoCorrect='false'
-                            spellCheck='false' />
+                            spellCheck='true' />
                         <button className='add-button' title='Add Item' onClick={() => addItem(inputData)}>Add</button>
                     </div>
 
@@ -124,9 +124,9 @@ const Todo = () => {
                                 items.map((element, index) => {
                                     return (
                                         <div className='eachItem' key={index}>
+                                            <i className='far fa-square complete-icon' title='Mark as Complete' onClick={() => completeItem(index)}></i>
                                             <span>{element}</span>
                                             {/* <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => activateEdit(index)}></i> */}
-                                            <i className='far fa-square complete-icon' title='Mark as Complete' onClick={() => completeItem(index)}></i>
                                             <i className='far fa-trash-alt delete-icon' title='Delete Item' onClick={() => deleteItem(index)}></i>
                                         </div>
                                     )
@@ -140,9 +140,9 @@ const Todo = () => {
                                 completedItems.map((element, index) => {
                                     return (
                                         <div className='eachItem-completed' key={index}>
+                                            <i className='fa fa-check-circle complete-icon' title='Mark as incomplete' onClick={() => undoComplete(index)}></i>
                                             <span>{element}</span>
                                             {/* <i className='fas fa-edit edit-icon' title='Edit task' onClick={() => activateEdit(index)}></i> */}
-                                            <i className='fa fa-check-circle complete-icon' title='Mark as incomplete' onClick={() => undoComplete(index)}></i>
                                             <i className='far fa-trash-alt delete-icon' title='Delete Item' onClick={() => deleteCompletedItem(index)}></i>
                                         </div>
                                     )
