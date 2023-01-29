@@ -90,7 +90,7 @@ const Todo = () => {
         setRemovePopupTrigger(false)
     }
     const completeAllItems = () => {
-        setCompletedItems(items)
+        setCompletedItems([...completedItems, ...items])
         setItems([])
         setCompletePopupTrigger(false)
     }
